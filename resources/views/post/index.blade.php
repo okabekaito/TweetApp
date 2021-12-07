@@ -24,7 +24,8 @@
 
                     <form method="POST" action="{{route('post.destroy',['id' => $post->id])}}">
                         @csrf
-                        <h4 class="border-bottom"> {{$post->content}}</h4>
+                        {{ Auth::user()->name }}さん
+                        <h4 class="border-bottom">{{$post->content}}</h4>
                         <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("削除してよろしいですか？");'>
                     </form>
                     @endforeach
