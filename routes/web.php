@@ -14,7 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::group(['prefix' => 'post', 'middleware' => 'auth'], function () {
+    Route::get('index', 'PostFormController@index')->name('post.index');
+    Route::get('create', 'PostFormController@create')->name('post.create');
+    Route::post('store', 'PostFormController@store')->name('post.store');
+    Route::post('destroy/{id}', 'PostFormController@destroy')->name('post.destroy');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
