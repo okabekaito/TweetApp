@@ -26,6 +26,7 @@ class PostFormController extends Controller
         $posts =  PostForm::All();
 
 
+
         return view('post.index', compact('posts'));
     }
 

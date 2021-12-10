@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
+use App\Models\PostForm;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = PostForm::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->get();
+        return view('home', compact('posts'));
     }
 }
