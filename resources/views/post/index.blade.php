@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">一覧ページ</div>
                 <span class="border-bottom"></span>
                 <div class="card-body">
                     @if (session('status'))
@@ -16,17 +16,15 @@
                     <form method="GET" action="{{route('post.create')}}">
                         <button class="btn btn-primary">投稿</button>
                     </form>
-                    indexです
-                    <span class="border-bottom"></span>
+
 
                     @foreach($posts as $post)
 
 
                     <form method="POST" action="{{route('post.destroy',['id' => $post->id])}}">
                         @csrf
-                        {{ Auth::user()->name }}さん
-                        <h4 class="border-bottom">{{$post->content}}</h4>
-                        <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("削除してよろしいですか？");'>
+                        {{ $post->user->name }}さん
+                        <h4 class="border-bottom">{{$post->content}}<input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("削除してよろしいですか？");'></h4>
                     </form>
                     @endforeach
                 </div>

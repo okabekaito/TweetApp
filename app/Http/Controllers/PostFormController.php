@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\PostForm;
+use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PostFormController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,10 @@ class PostFormController extends Controller
     public function index()
     {
 
-        $posts =  DB::table('post_forms')->select('content', 'id')->get();
+
+        $posts =  PostForm::All();
+
+
         return view('post.index', compact('posts'));
     }
 
@@ -40,7 +47,9 @@ class PostFormController extends Controller
     public function store(Request $request)
     {
         $post = new PostForm;
+
         $post->content = $request->input('content');
+        $post->user_id = $request->user()->id;
 
         $post->save();
 

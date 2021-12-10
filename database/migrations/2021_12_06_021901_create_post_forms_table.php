@@ -17,6 +17,12 @@ class CreatePostFormsTable extends Migration
             $table->bigIncrements('id');
             $table->string('content', 300,);
             $table->timestamps();
+
+            $table->unsignedBigInteger('user_id'); //カラム追加
+            $table->foreign('user_id') //外部キー制約
+                ->references('id')->on('users') //ｕｓｅｒｓテーブルのidを参照する
+                ->onDelete('cascade');  //ユーザーが削除されたら紐付くpostsも削除
+
         });
     }
 
