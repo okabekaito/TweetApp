@@ -19,13 +19,21 @@
 
 
                     @foreach($posts as $post)
-
-
-                    <form method="POST" action="{{route('post.destroy',['id' => $post->id])}}">
-                        @csrf
+                    <div class=" border-bottom">
                         {{ $post->user->name }}さん
-                        <h4 class="border-bottom">{{$post->content}}<input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("削除してよろしいですか？");'></h4>
-                    </form>
+                        <h3>{{$post->content}}</h3>
+
+                        @auth
+                        @if( ( $post->user_id ) === ( Auth::user()->id ) )
+                        <form method="POST" action="{{route('post.destroy',['id' => $post->id])}}">
+                            @csrf
+
+
+                            <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("削除してよろしいですか？");'>
+                            @endif
+                            @endauth
+                        </form>
+                    </div>
                     @endforeach
                 </div>
             </div>
