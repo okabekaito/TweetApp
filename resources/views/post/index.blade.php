@@ -13,29 +13,24 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form method="GET" action="{{route('post.create')}}">
-                        <button class="btn btn-primary">投稿</button>
-                    </form>
-
-
                     @foreach($posts as $post)
-                    <div class=" border-bottom">
+                    <div class=" border-bottom col-12">
                         {{ $post->user->name }}さん
                         <h3>{{$post->content}}</h3>
 
                         @auth
                         @if( ( $post->user_id ) === ( Auth::user()->id ) )
-                        <form method="POST" action="{{route('post.destroy',['id' => $post->id])}}">
+                        <form method="POST" class="row" action="{{route('post.destroy',['id' => $post->id])}}">
                             @csrf
-                            <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("削除してよろしいですか？");'>
+                            <input type="submit" value="&#xf2ed;" class="fas btn btn-danger btn-lg " onclick='return confirm("削除してよろしいですか？");'>
                             @endif
                             @endauth
 
-                            <div>
+                            <div class="ml-2">
                                 @if($post->is_liked_by_auth_user())
-                                <a href="{{ route('post.unlike', ['id' => $post->id]) }}" class="btn btn-success btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+                                <a href="{{ route('post.unlike', ['id' => $post->id]) }}" class="btn-lg btn btn-success fas fa-heart"><span class="badge">{{ $post->likes->count() }}</span></a>
                                 @else
-                                <a href="{{ route('post.like', ['id' => $post->id]) }}" class="btn btn-secondary btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+                                <a href="{{ route('post.like', ['id' => $post->id]) }}" class="btn-lg btn btn-outline-secondary fas fa-heart"><span class="badge">{{ $post->likes->count() }}</span></a>
                                 @endif
                             </div>
                         </form>
