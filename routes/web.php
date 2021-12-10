@@ -19,6 +19,8 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth'], function () {
     Route::get('create', 'PostFormController@create')->name('post.create');
     Route::post('store', 'PostFormController@store')->name('post.store');
     Route::post('destroy/{id}', 'PostFormController@destroy')->name('post.destroy');
+    Route::get('/post/like/{id}', 'PostFormController@like')->name('post.like');
+    Route::get('/post/unlike/{id}', 'PostFormController@unlike')->name('post.unlike');
 });
 Auth::routes();
 

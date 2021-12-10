@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
 use Illuminate\Http\Request;
 
 use App\Models\PostForm;
@@ -102,5 +103,29 @@ class PostFormController extends Controller
         $post->delete();
 
         return redirect('post/index');
+    }
+
+    public function like($id)
+    {
+        Like::create([
+            'post_id' => $id,
+            'user_id' => Auth::id(),
+        ]);
+
+        return redirect()->back();
+    }
+
+    /**
+     * 引数のIDに紐づくリプライにUNLIKEする
+     *
+     * @param $id リプライID
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unlike($id)
+    {
+        $like = Like::where('post_id', $id)->where('user_id', Auth::id())->first();
+        $like->delete();
+
+        return redirect()->back();
     }
 }
