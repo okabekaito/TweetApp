@@ -23,5 +23,4 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth'], function () {
     Route::get('/post/unlike/{id}', 'PostFormController@unlike')->name('post.unlike');
 });
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
