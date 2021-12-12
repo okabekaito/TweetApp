@@ -28,7 +28,7 @@
             @if (Route::has('login'))
             <div class="top-right links  row d-flex justify-content-center">
                 @auth
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/post/index') }}" class="btn1 btn-3d btn-3db col-3 mr-2">一覧へ</a>
                 @else
                 <a href="{{ route('login') }} " class="btn1 btn-3d btn-3db col-3 mr-2">ログイン</a>
 
